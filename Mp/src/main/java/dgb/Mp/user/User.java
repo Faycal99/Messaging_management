@@ -1,6 +1,7 @@
 package dgb.Mp.user;
 
 import dgb.Mp.Picrures.Picture;
+import dgb.Mp.Role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,8 +23,10 @@ public class User {
 
     private String userName;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
     private Role role;
+
 
     private String password;
 

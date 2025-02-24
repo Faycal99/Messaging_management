@@ -1,6 +1,5 @@
 package dgb.Mp.user.Dtos;
 
-import dgb.Mp.user.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
@@ -14,15 +13,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SuccessfulLoginDto {
 
-    private Long id;
 
-    private String username;
+        private String accessToken;
 
-    private String base64ContentImage;
+        private String refreshToken;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+        private UserDto user;
+        // getters and setters
+    }
 
 
 
-}
+
+

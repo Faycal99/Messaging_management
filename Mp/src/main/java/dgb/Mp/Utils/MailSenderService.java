@@ -24,7 +24,7 @@ public class MailSenderService {
 
         String emailContent = genareteHtmlEmail(username,password);// true enables multipart (for attachments)
 
-        helper.setFrom("your-email@gmail.com");  // Sender's email
+        helper.setFrom("spring.mail.username");  // Sender's email
         helper.setTo(toEmail);  // Recipient email
         helper.setSubject("Welcome to Couriel Management !");  // Subject
         helper.setText(emailContent, true);  // true means HTML content

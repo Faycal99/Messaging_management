@@ -1,79 +1,53 @@
 package dgb.Mp.config;
 
-import dgb.Mp.config.filters.SessionValidationFilter;
-
-import dgb.Mp.user.SecurityUserDetailsService;
-import jakarta.servlet.http.HttpServletResponse;
+import dgb.Mp.config.filters.JWTAuthenticationFilter;
+import dgb.Mp.user.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
-
-    private final SecurityUserDetailsService userDetailsService;
-    private final SessionValidationFilter sessionValidationFilter;
+public class SecurityConfig  {
 
     @Autowired
-    public SecurityConfig(SecurityUserDetailsService userDetailsService, SessionValidationFilter sessionValidationFilter) {
-        this.userDetailsService = userDetailsService;
-        this.sessionValidationFilter = sessionValidationFilter;
+    private JWTAuthenticationFilter jwtAuthenticationFilter;
+
+    @Autowired
+    private CustomUserDetailService customUserDetailsService;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/login", "/register").permitAll()  // Public endpoints
+                .anyRequest().authenticated()
+                .and()
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .addFilterBefore(sessionValidationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
-                .csrf().disable()
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login").permitAll() // Exact match
-                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/auth/register").permitAll() // Explicit POST match
-                        .anyRequest().authenticated()
-                )
-                .formLogin().disable()
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Ensure session isn’t forced unnecessarily
-                        .maximumSessions(1)
-                        .expiredUrl("/auth/login")
-
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/auth/logout")
-                        .logoutSuccessHandler((req, res, auth) -> res.setStatus(200))
-                )
-                .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint((req, res, authEx) -> {
-                            System.out.println("Authentication failed for: " + req.getRequestURI());
-                            res.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied");
-                        })
-                );
-        return http.build();
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailsService);  // Using custom UserDetailsService
     }
 
+    @Override
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher() {
-        return new HttpSessionEventPublisher();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-        return authBuilder.build();
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
+

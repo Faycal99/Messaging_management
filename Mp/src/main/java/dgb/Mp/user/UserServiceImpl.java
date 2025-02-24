@@ -25,6 +25,10 @@ public class UserServiceImpl implements UserService {
     public User getUser(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not found with given id"+id));
     }
+
+
+
+
     @Transactional
     @Override
     public User createUser(UserDtoToAdd userDtoToAdd, User user) throws MessagingException , MailException {

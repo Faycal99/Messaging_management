@@ -1,6 +1,5 @@
 package dgb.Mp.user.Dtos;
 
-import dgb.Mp.user.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
