@@ -19,7 +19,7 @@ public class JwtUtils {
     private static long accessTokenExpiration;
 
     @Value("${jwt.expiration.refresh}")
-    private static long refreshTokenExpiration;
+    public static long refreshTokenExpiration;
 
 
 
@@ -95,6 +95,9 @@ public class JwtUtils {
     // Get expiration date
     public static Date extractExpiration(String token) {
         return extractClaims(token).getExpiration();
+    }
+    public static Date extractIssuedAt(String token) {
+        return extractClaims(token).getIssuedAt();
     }
 
     public static boolean isTokenExpired(String token) {

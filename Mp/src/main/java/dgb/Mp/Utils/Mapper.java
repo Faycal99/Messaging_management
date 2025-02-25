@@ -5,6 +5,8 @@ import dgb.Mp.Picrures.Picture;
 import dgb.Mp.Role.Dtos.RoleDto;
 import dgb.Mp.Role.Role;
 import dgb.Mp.privileges.Privilege;
+import dgb.Mp.privileges.PrivilegeDto.PrivilegeDto;
+import dgb.Mp.privileges.PrivilegeDto.PrivilegesDtos;
 import dgb.Mp.user.Dtos.UserDto;
 import dgb.Mp.user.User;
 import org.mapstruct.Mapping;
@@ -16,6 +18,9 @@ import java.util.stream.Collectors;
 
 @org.mapstruct.Mapper(componentModel = "spring")
 public interface Mapper {
+
+
+    PrivilegeDto toPrivilegeDto(Privilege privilege);
 
     PictureDto toPictureDto(Picture picture);
 
@@ -38,4 +43,6 @@ public interface Mapper {
 
 
     }
+
+
 }
