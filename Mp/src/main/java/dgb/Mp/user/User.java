@@ -7,12 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor@Entity
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -22,6 +26,8 @@ public class User {
     private Long id;
 
     private String userName;
+
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
@@ -33,6 +39,7 @@ public class User {
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = true)
     private Picture picture;
 
 

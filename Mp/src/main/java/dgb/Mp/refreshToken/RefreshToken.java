@@ -23,7 +23,7 @@ public class RefreshToken {
     @OneToOne
     private  User user;
 
-    private  String token;
+    private  String refreshToken;
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

@@ -6,6 +6,7 @@ import dgb.Mp.Role.Dtos.RoleDto;
 import dgb.Mp.Role.Role;
 import dgb.Mp.departement.Departement;
 import dgb.Mp.departement.Dtos.DepartementDto;
+import dgb.Mp.privileges.Dtos.PrivilegeDto;
 import dgb.Mp.privileges.Privilege;
 import dgb.Mp.user.Dtos.UserDto;
 import dgb.Mp.user.User;
@@ -42,4 +43,5 @@ public interface Mapper {
     }
 //
     DepartementDto toDepartementDto(Departement departement);
+    PrivilegeDto toPrivilegeDto(Privilege privilege);
 }

@@ -1,5 +1,6 @@
 package dgb.Mp.Role.Dtos;
 
+import dgb.Mp.Role.enums.RoleName;
 import dgb.Mp.privileges.Privilege;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class RoleDto {
 
     private Long Id;
 
-    private String Name;
+    private RoleName Name;
 
     private Set<String> privilegesIdsList;
 }

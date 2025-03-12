@@ -31,8 +31,9 @@ public class Departement {
     @JoinColumn(name = "director_id")
     private User director;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany()
     private Set<User> employees;
+
 
 
 }
