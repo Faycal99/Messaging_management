@@ -5,10 +5,14 @@ import dgb.Mp.Division.Dto.DivisionDto;
 import dgb.Mp.Division.Dto.DivisionDtoToAdd;
 import dgb.Mp.Utils.Mapper;
 import dgb.Mp.generalAdvice.customException.DivisionNotFoundException;
+import dgb.Mp.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import dgb.Mp.user.UserService;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +21,7 @@ public class DivisionServiceImpl implements DivisionService {
 
     private final DivisionRepository divisionRepository;
     private final Mapper mapper;
+    private final UserService userService;
 
 
 
@@ -36,17 +41,17 @@ public class DivisionServiceImpl implements DivisionService {
     @Override
     public DivisionDto addDivision(DivisionDtoToAdd divisionDtoToAdd) {
 
-        Division division = new Division();
-        division.setName(divisionDtoToAdd.getName());
+        User director =userService.getUser(divisionDtoToAdd.getDirectorUserId());
+        Division division=new Division();
+        division.setDirector(director);
+        division.setDivisionName(divisionDtoToAdd.getDivisionName());
 
-
-        /*
         Set<User> employees = new HashSet<>();
         divisionDtoToAdd.getEmployeesIds().forEach(employeesId -> {
             employees.add(userService.getUser(employeesId));
         });
         division.setEmployees(employees);
-         */
+
 
         return mapper.toDivisionDto(divisionRepository.save(division));
     }
@@ -56,10 +61,26 @@ public class DivisionServiceImpl implements DivisionService {
     @Override
     public DivisionDto updateDivision(DivisionDto divisionDto, Long id) {
 
-        Division division = divisionRepository.findById(id).orElseThrow(()->new DivisionNotFoundException(id));
-        division.setName(divisionDto.getName());
 
-        return mapper.toDivisionDto(divisionRepository.save(division));
+        Division existingDivision = divisionRepository.findById(id).orElseThrow(() -> new DivisionNotFoundException(id));
+
+        if (divisionDto.getDirectorUserId() != null) {
+            User director = userService.getUser(divisionDto.getDirectorUserId());
+            existingDivision.setDirector(director);
+        }
+        if (divisionDto.getDivisionName() != null) {
+            existingDivision.setDivisionName(divisionDto.getDivisionName());
+        }
+        if (divisionDto.getEmployeesIds() != null) {
+            Set<User> employees = new HashSet<>();
+            divisionDto.getEmployeesIds().forEach(employeeId -> {employees.add(userService.getUser(employeeId));});
+            existingDivision.setEmployees(employees);
+        }
+
+        Division updatedDivision = divisionRepository.save(existingDivision);
+
+        return mapper.toDivisionDto(updatedDivision);
+
     }
 
 
@@ -67,7 +88,6 @@ public class DivisionServiceImpl implements DivisionService {
     @Override
     public void deleteDivision(Long id) {
 
-        divisionRepository.deleteById(id);
         Division division = divisionRepository.findById(id).orElseThrow(()->new DivisionNotFoundException(id));
         divisionRepository.delete(division);
 

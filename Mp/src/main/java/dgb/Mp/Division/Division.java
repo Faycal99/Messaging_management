@@ -1,18 +1,20 @@
 package dgb.Mp.Division;
 
 
+import dgb.Mp.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 
 public class Division {
 
@@ -21,19 +23,15 @@ public class Division {
     @SequenceGenerator(name = "division_seq_gen", sequenceName = "division_seq", allocationSize = 1)
 
     private Long id;
-    private String name;
+    private String divisionName;
 
-    /*
+    @OneToOne
+    @JoinColumn(name = "director_id")
+    private User director;
+
     @OneToMany()
     private Set<User> employees;
-     */
 
-
-
-    /*
-    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
-    private List<Direction> directions;
-     */
 
 
 

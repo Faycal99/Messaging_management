@@ -56,7 +56,7 @@ public class DivisionController {
     public ResponseEntity<String> deleteDivision(@PathVariable Long id) {
 
         divisionService.deleteDivision(id);
-        return ResponseEntity.ok("Division deleted successfully!");
+        return ResponseEntity.ok("division deleted with id: " + id);
 
     }
 

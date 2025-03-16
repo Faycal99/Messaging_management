@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,6 +15,8 @@ import lombok.Setter;
 public class DivisionDtoToAdd {
 
 
-    private String name;
-    //private Set<Long> employeesIds;
+    private String divisionName;
+    private Long directorUserId;
+    private Set<Long> employeesIds;
+
 }
