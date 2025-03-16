@@ -7,6 +7,8 @@ import dgb.Mp.Role.Role;
 import dgb.Mp.departement.Departement;
 import dgb.Mp.departement.Dtos.DepartementDto;
 import dgb.Mp.privileges.Dtos.PrivilegeDto;
+import dgb.Mp.directionGenerale.DirectionGenerale;
+import dgb.Mp.directionGenerale.Dtos.DirectionGeneraleDto;
 import dgb.Mp.privileges.Privilege;
 import dgb.Mp.user.Dtos.UserDto;
 import dgb.Mp.user.User;
@@ -46,4 +48,5 @@ public interface Mapper {
     PrivilegeDto toPrivilegeDto(Privilege privilege);
 
 
+    DirectionGeneraleDto toDirectionGeneraleDto(DirectionGenerale directionGenerale);
 }
