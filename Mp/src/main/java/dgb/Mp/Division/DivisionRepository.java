@@ -12,8 +12,6 @@ import java.util.Optional;
 public interface DivisionRepository extends JpaRepository<Division, Long> {
 
 
-    Optional<Division> findById(Long id);
-    Optional<Division>  findByName(String name);
 
 
 }

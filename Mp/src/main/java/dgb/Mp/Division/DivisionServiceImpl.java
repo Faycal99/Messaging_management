@@ -88,6 +88,7 @@ public class DivisionServiceImpl implements DivisionService {
     @Override
     public void deleteDivision(Long id) {
 
+        divisionRepository.deleteById(id);
         Division division = divisionRepository.findById(id).orElseThrow(()->new DivisionNotFoundException(id));
         divisionRepository.delete(division);
 
