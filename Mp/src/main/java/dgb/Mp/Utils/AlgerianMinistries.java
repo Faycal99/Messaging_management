@@ -1,0 +1,31 @@
+package dgb.Mp.Utils;
+
+public enum AlgerianMinistries {
+    Foreign_Affairs,
+    National_Defense,
+            Interior_Local_Authorities_National_Planning,
+    Finance,
+            Energy_Mines,
+    Justice,
+            National_Education,
+    Higher_Education_Scientific_Research,
+            Health,
+    Industry,
+            Trade_Export_Promotion,
+    Agriculture_Rural_Development,
+            Transport,
+    Public_Works_Basic_Infrastructures,
+            Water_Resources_Water_Security,
+    Environment,
+            Tourism_Handicrafts,
+    Communication,
+            Labor_Employment_Social_Security,
+    National_Solidarity_Family_Womens_Affairs,
+            Housing_Urban_Planning_City,
+    Religious_Affairs_Wakfs,
+            Culture_Arts,
+    Youth_Sports,
+            Post_Telecommunications_Technologies_Digitalization,
+    Fisheries_Fishery_Resources,
+            Mujahideen_Rights_Holders
+}
