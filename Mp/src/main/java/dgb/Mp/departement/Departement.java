@@ -31,7 +31,7 @@ public class Departement {
     @JoinColumn(name = "director_id")
     private User director;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "division")
     private Set<User> employees;
 
 
