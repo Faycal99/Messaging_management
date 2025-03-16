@@ -1,6 +1,8 @@
 package dgb.Mp.generalAdvice;
 
+import dgb.Mp.Division.Division;
 import dgb.Mp.generalAdvice.customException.DepartementNotFoundException;
+import dgb.Mp.generalAdvice.customException.DivisionNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,6 +13,11 @@ public class RestAdvice {
 
     @ExceptionHandler(DepartementNotFoundException.class)
     public ResponseEntity<String> handleDepartementNotFound(DepartementNotFoundException ex){
+        return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DivisionNotFoundException.class)
+    public ResponseEntity<String> handleDivisionNotFound(DivisionNotFoundException ex){
         return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
