@@ -26,6 +26,6 @@ public class DirectionGenerale {
 
     @OneToMany(mappedBy = "directionGenerale")
     private Set<User> employees;
-/**/
+
 
 }
