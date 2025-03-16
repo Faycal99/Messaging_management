@@ -42,6 +42,14 @@ public class User {
     @JoinColumn(nullable = true)
     private Picture picture;
 
+    /*
+
+    @ManyToOne
+    @JoinColumn(name = "division_id", nullable = false)
+    private Division division;
+
+    */
+
 
 
 

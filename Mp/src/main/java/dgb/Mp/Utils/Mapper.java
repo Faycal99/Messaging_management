@@ -1,5 +1,7 @@
 package dgb.Mp.Utils;
 
+import dgb.Mp.Division.Division;
+import dgb.Mp.Division.Dto.DivisionDto;
 import dgb.Mp.Picrures.Dtos.PictureDto;
 import dgb.Mp.Picrures.Picture;
 import dgb.Mp.Role.Dtos.RoleDto;
@@ -44,4 +46,7 @@ public interface Mapper {
 //
     DepartementDto toDepartementDto(Departement departement);
     PrivilegeDto toPrivilegeDto(Privilege privilege);
+    DivisionDto toDivisionDto(Division division);
+
+
 }
