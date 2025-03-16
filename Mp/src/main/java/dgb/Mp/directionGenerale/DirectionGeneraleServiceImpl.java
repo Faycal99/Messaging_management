@@ -1,6 +1,6 @@
 package dgb.Mp.directionGenerale;
-import dgb.Mp.Advices.CustomException.DepartementNotFoundException;
-import dgb.Mp.Advices.CustomException.DirectionGeneraleNotFoundException;
+import dgb.Mp.generalAdvice.customException.DepartementNotFoundException;
+import dgb.Mp.generalAdvice.customException.DirectionGeneraleNotFoundException;
 import dgb.Mp.Utils.Mapper;
 import dgb.Mp.departement.Departement;
 import dgb.Mp.directionGenerale.Dtos.DirectionGeneraleDto;

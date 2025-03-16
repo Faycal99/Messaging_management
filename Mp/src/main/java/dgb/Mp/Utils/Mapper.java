@@ -6,6 +6,8 @@ import dgb.Mp.Picrures.Dtos.PictureDto;
 import dgb.Mp.Picrures.Picture;
 import dgb.Mp.Role.Dtos.RoleDto;
 import dgb.Mp.Role.Role;
+import dgb.Mp.SousDirection.Dtos.SousDirectionDto;
+import dgb.Mp.SousDirection.SousDirection;
 import dgb.Mp.departement.Departement;
 import dgb.Mp.departement.Dtos.DepartementDto;
 import dgb.Mp.privileges.Dtos.PrivilegeDto;
@@ -54,4 +56,5 @@ public interface Mapper {
 
 
     DirectionGeneraleDto toDirectionGeneraleDto(DirectionGenerale directionGenerale);
+    SousDirectionDto toSousDirectionDto(SousDirection sousDirection);
 }
