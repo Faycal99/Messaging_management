@@ -3,6 +3,7 @@ package dgb.Mp.Courierl.Dtos;
 import dgb.Mp.Courierl.enums.Couriel_Type;
 import dgb.Mp.Courierl.enums.Priority;
 import dgb.Mp.Courierl.enums.Status;
+import dgb.Mp.validation.ValidCouriel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ValidCouriel(message = "Check your couriel fields!")
 public class CourielDtoToAdd {
 
     private Integer courielNumber;
@@ -21,12 +23,12 @@ public class CourielDtoToAdd {
     private Couriel_Type type;
     private Status status;
     private Long archivedById;
-    private Long fromDgbId;
+    private Long fromDirectionGeneralId;
     private Long fromDivisionId;
     private Long fromDirectionId;
     private Long fromSousDirectionId;
     private String fromExternal;
-    private Long toDgbId;
+    private Long toDirectionGeneralId;
     private Long toDivisionId;
     private Long toDirectionId;
     private Long toSousDirectionId;

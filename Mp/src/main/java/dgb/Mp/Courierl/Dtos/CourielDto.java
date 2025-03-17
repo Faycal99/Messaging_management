@@ -33,12 +33,12 @@ public class CourielDto {
     private Long fromDivisionId;
     private Long fromDirectionId;
     private Long fromSousDirectionId;
-    private String fromExternal;
+    private AlgerianMinistries fromExternal;
     private Long toDirectionGeneralId;
     private Long toDivisionId;
     private Long toDirectionId;
     private Long toSousDirectionId;
-    private String toExternal;
+    private AlgerianMinistries toExternal;
     private Date arrivedDate;
     private Date departureDate;
     private Date returnDate;

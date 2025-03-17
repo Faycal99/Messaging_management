@@ -6,6 +6,7 @@ import dgb.Mp.Courierl.Dtos.CourielDtoToAdd;
 import dgb.Mp.Utils.Mapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class CourielController {
     @PostMapping
     @Operation(summary = "Create new Couriel",description = "add new couriel")
 
-    public ResponseEntity<CourielDto> createCouriel(@RequestBody CourielDtoToAdd courielDtoToAdd) {
+    public ResponseEntity<CourielDto> createCouriel(@Valid @RequestBody CourielDtoToAdd courielDtoToAdd) {
         return ResponseEntity.status(HttpStatus.CREATED).body(courielService.addCouriel(courielDtoToAdd));
     }
 
