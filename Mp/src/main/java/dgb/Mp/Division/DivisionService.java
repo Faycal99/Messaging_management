@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DivisionService {
 
-    public DivisionDto getDivisionById(Long id);
+    public Division getDivisionById(Long id);
 
 
     public List<DivisionDto> getAllDivision();

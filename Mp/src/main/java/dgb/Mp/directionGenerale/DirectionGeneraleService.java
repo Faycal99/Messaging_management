@@ -10,8 +10,8 @@ public interface DirectionGeneraleService {
 
     public DirectionGeneraleDto addDirectionGenerale(DirectionGeneraleDtoToAdd directionGeneraleDtoToAdd);
 
-    public DirectionGeneraleDto updateDirectionGenerale(DirectionGeneraleDto directionGeneraleDto, long id );
+    public DirectionGeneraleDto updateDirectionGenerale(DirectionGeneraleDto directionGeneraleDto, Long id );
 
-    public void deleteDirectionGenerale(long id);
+    public void deleteDirectionGenerale(Long id);
 }
 

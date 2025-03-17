@@ -1,10 +1,11 @@
 package dgb.Mp.directionGenerale;
-import dgb.Mp.Advices.CustomException.DepartementNotFoundException;
-import dgb.Mp.Advices.CustomException.DirectionGeneraleNotFoundException;
+import dgb.Mp.generalAdvice.customException.DepartementNotFoundException;
+
 import dgb.Mp.Utils.Mapper;
 import dgb.Mp.departement.Departement;
 import dgb.Mp.directionGenerale.Dtos.DirectionGeneraleDto;
 import dgb.Mp.directionGenerale.Dtos.DirectionGeneraleDtoToAdd;
+import dgb.Mp.generalAdvice.customException.DirectionGeneraleNotFoundException;
 import dgb.Mp.user.User;
 import dgb.Mp.user.UserService;
 
@@ -52,7 +53,7 @@ public class DirectionGeneraleServiceImpl implements DirectionGeneraleService {
     }
 
     @Override
-    public DirectionGeneraleDto updateDirectionGenerale(DirectionGeneraleDto directionGeneraleDto, long id) {
+    public DirectionGeneraleDto updateDirectionGenerale(DirectionGeneraleDto directionGeneraleDto, Long id) {
         DirectionGenerale existingDirectionGenerale = directionGeneraleRepository.findById(id).orElseThrow(() -> new DirectionGeneraleNotFoundException(id));
 
         if (directionGeneraleDto.getDirectorUserId() != null) {
@@ -74,7 +75,7 @@ public class DirectionGeneraleServiceImpl implements DirectionGeneraleService {
     }
 
     @Override
-    public void deleteDirectionGenerale(long id) {
+    public void deleteDirectionGenerale(Long id) {
      DirectionGenerale directionGenerale = directionGeneraleRepository.findById(id).orElseThrow(() -> new DirectionGeneraleNotFoundException(id));
      directionGeneraleRepository.delete(directionGenerale);
     }

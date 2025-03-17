@@ -31,6 +31,8 @@ public class CourielDtoToAdd {
     private Long toDirectionId;
     private Long toSousDirectionId;
     private String toExternal;
-    private Date startDate; // For creationDate range
-    private Date endDate;
+    private Date arrivedDate;
+    private Date departureDate;
+    private Date returnDate;
+    private Date registerDate;
 }

@@ -1,5 +1,6 @@
 package dgb.Mp.controllers;
 
+import dgb.Mp.Division.Division;
 import dgb.Mp.Division.DivisionService;
 import dgb.Mp.Division.Dto.DivisionDto;
 import dgb.Mp.Division.Dto.DivisionDtoToAdd;
@@ -26,7 +27,7 @@ public class DivisionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DivisionDto> getDivisionById(@PathVariable Long id) {
+    public ResponseEntity<Division> getDivisionById(@PathVariable Long id) {
 
         return ResponseEntity.ok(divisionService.getDivisionById(id));
     }

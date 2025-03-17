@@ -23,49 +23,24 @@ import java.util.Date;
 public class CourielDto {
     private Long id;
 
-
-    private Integer Couriel_Number;
-
-    //  private String sender;
-
+    private Integer courielNumber;
     private String subject;
-
-    //   private String description;
-
-
     private Priority priority;
-    private Status status;
-    private Couriel_Type couriel_Type;
-
-
     private Couriel_Type type;
-
-
-    private Long archivedByUserId;
-
-
-    private Long fromDgbId;
-
-
+    private Status status;
+    private Long archivedById;
+    private Long fromDirectionGeneralId;
     private Long fromDivisionId;
-
-
+    private Long fromDirectionId;
     private Long fromSousDirectionId;
-
-  private AlgerianMinistries fromExternal; // e.g., "Ministry:Finance" for external sender
-
-    // Receiver (To) relationships - only one should be set
-
-    private Long toDgbId;
-
-
+    private String fromExternal;
+    private Long toDirectionGeneralId;
     private Long toDivisionId;
-
+    private Long toDirectionId;
     private Long toSousDirectionId;
-
-    private AlgerianMinistries toExternal;
-
-    private Date startDate; // For creationDate range
-    private Date endDate;
-
+    private String toExternal;
+    private Date arrivedDate;
+    private Date departureDate;
+    private Date returnDate;
+    private Date registerDate;
 }

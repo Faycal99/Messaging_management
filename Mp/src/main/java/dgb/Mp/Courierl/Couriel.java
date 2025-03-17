@@ -4,6 +4,8 @@ package dgb.Mp.Courierl;
 import dgb.Mp.Courierl.enums.Couriel_Type;
 import dgb.Mp.Courierl.enums.Priority;
 import dgb.Mp.Courierl.enums.Status;
+import dgb.Mp.Division.Division;
+import dgb.Mp.directionGenerale.DirectionGenerale;
 import dgb.Mp.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -47,10 +49,30 @@ public class Couriel {
         @JoinColumn(name = "archived_by_id")
         private User archivedBy;
 
+        private Date arrivedDate;
+        private Date departureDate;
+        private Date returnDate;
+        private Date registerDate;
+
+        @ManyToOne
+        @JoinColumn(name = "from_dg_id", nullable = true)
+        private DirectionGenerale fromDirectionGenerale;
+
+        @ManyToOne
+        @JoinColumn(name = "from_division_id", nullable = true)
+        private Division fromDivision;
+
+        @ManyToOne
+        @JoinColumn(name = "to_dg_id", nullable = true)
+        private DirectionGenerale toDirectionGenerale;
+
+        @ManyToOne
+        @JoinColumn(name = "to_division_id", nullable = true)
+        private Division toDivision;
+
+
         /*
-       @ManyToOne
-    @JoinColumn(name = "from_dgb_id", nullable = true)
-    private Dgb fromDgb;
+
 
     @ManyToOne
     @JoinColumn(name = "from_division_id", nullable = true)
@@ -85,8 +107,6 @@ public class Couriel {
 
     private EnumMinistry toExternal;
     */
-
-        private Date creationDate;
 
 
 }

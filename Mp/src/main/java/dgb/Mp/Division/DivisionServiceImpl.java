@@ -27,8 +27,9 @@ public class DivisionServiceImpl implements DivisionService {
 
 
     @Override
-    public DivisionDto getDivisionById(Long id) {
-        return divisionRepository.findById(id).map(mapper::toDivisionDto).orElseThrow(() -> new DivisionNotFoundException(id));
+    public Division getDivisionById(Long id) {
+        return divisionRepository.findById(id).orElseThrow(() -> new DivisionNotFoundException(id));
+    //  return directionGeneraleRepository.findById(id).orElseThrow(()->new DirectionGeneraleNotFoundException(id));
     }
 
 

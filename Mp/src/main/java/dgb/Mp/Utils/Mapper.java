@@ -1,5 +1,7 @@
 package dgb.Mp.Utils;
 
+import dgb.Mp.Courierl.Couriel;
+import dgb.Mp.Courierl.Dtos.CourielDto;
 import dgb.Mp.Division.Division;
 import dgb.Mp.Division.Dto.DivisionDto;
 import dgb.Mp.Picrures.Dtos.PictureDto;
@@ -49,7 +51,7 @@ public interface Mapper {
     DepartementDto toDepartementDto(Departement departement);
     PrivilegeDto toPrivilegeDto(Privilege privilege);
     DivisionDto toDivisionDto(Division division);
-
+CourielDto toCourielDto(Couriel couriel);
 
 
 
