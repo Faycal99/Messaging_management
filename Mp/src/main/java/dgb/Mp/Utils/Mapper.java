@@ -1,5 +1,7 @@
 package dgb.Mp.Utils;
 
+import dgb.Mp.Direction.Direction;
+import dgb.Mp.Direction.Dtos.DirectionDto;
 import dgb.Mp.Division.Division;
 import dgb.Mp.Division.Dto.DivisionDto;
 import dgb.Mp.Picrures.Dtos.PictureDto;
@@ -8,6 +10,8 @@ import dgb.Mp.Role.Dtos.RoleDto;
 import dgb.Mp.Role.Role;
 import dgb.Mp.SousDirection.Dtos.SousDirectionDto;
 import dgb.Mp.SousDirection.SousDirection;
+import dgb.Mp.Direction.Dtos.DirectionDto;
+import dgb.Mp.Direction.Direction;
 import dgb.Mp.departement.Departement;
 import dgb.Mp.departement.Dtos.DepartementDto;
 import dgb.Mp.privileges.Dtos.PrivilegeDto;
@@ -57,4 +61,5 @@ public interface Mapper {
 
     DirectionGeneraleDto toDirectionGeneraleDto(DirectionGenerale directionGenerale);
     SousDirectionDto toSousDirectionDto(SousDirection sousDirection);
+    DirectionDto toDirectionDto (Direction direction);
 }
