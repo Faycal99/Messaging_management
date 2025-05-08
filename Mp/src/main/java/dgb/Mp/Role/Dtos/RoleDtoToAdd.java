@@ -1,5 +1,6 @@
 package dgb.Mp.Role.Dtos;
 
+import dgb.Mp.Role.enums.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

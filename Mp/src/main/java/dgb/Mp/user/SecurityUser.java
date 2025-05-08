@@ -4,11 +4,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.Transient;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -26,7 +29,7 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return user.getEmail();
     }
 
     @Override
@@ -35,16 +38,26 @@ public class SecurityUser implements UserDetails {
     }
 
     // Return the user's authorities (roles and privileges)
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return user.getRole().getPrivileges().stream()
+//                .map(privilege -> (new SimpleGrantedAuthority(privilege.getName().name())))
+//                .collect(Collectors.toSet());// Correct placement of parentheses
+//
+//    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getRole().getPrivileges().stream()
-                .map(privilege -> (new SimpleGrantedAuthority(privilege.getName().name())))
-                .collect(Collectors.toSet());// Correct placement of parentheses
-
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        // Add role-based authority
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().getId()));
+        // Add privilege-based authorities
+        authorities.addAll(user.getRole().getPrivileges().stream()
+                .map(privilege -> new SimpleGrantedAuthority(privilege.getName().name()))
+                .collect(Collectors.toSet()));
+        return authorities;
     }
-
-
-
 
     @Override
     public boolean isAccountNonExpired() {

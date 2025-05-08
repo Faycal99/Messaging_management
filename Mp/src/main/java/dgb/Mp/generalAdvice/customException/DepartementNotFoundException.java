@@ -1,4 +1,4 @@
-package dgb.Mp.Advices.CustomException;
+package dgb.Mp.generalAdvice.customException;
 
 public class DepartementNotFoundException extends RuntimeException {
     public DepartementNotFoundException(Long id) {

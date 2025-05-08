@@ -1,9 +1,9 @@
 package dgb.Mp.departement;
 
-import dgb.Mp.Advices.CustomException.DepartementNotFoundException;
 import dgb.Mp.Utils.Mapper;
 import dgb.Mp.departement.Dtos.DepartementDto;
 import dgb.Mp.departement.Dtos.DepartementDtoToAdd;
+import dgb.Mp.generalAdvice.customException.DepartementNotFoundException;
 import dgb.Mp.user.User;
 import dgb.Mp.user.UserService;
 import lombok.RequiredArgsConstructor;

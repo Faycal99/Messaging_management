@@ -1,5 +1,6 @@
 package dgb.Mp.Role;
 
+import dgb.Mp.Role.enums.RoleName;
 import dgb.Mp.privileges.Privilege;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,10 +22,12 @@ public class Role {
     @SequenceGenerator(name = "role_seq_gen", sequenceName = "role_seq", allocationSize = 1)
     private Long id;
 
-    private String name;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    private RoleName name;
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "role_privileges",
             joinColumns = @JoinColumn(name = "role_id"),

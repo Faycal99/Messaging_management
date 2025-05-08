@@ -9,63 +9,60 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Component
 public class JwtUtils {
-
     @Value("${jwt.secret}")
-    private static String secretKey;
+    private String secretKey;
 
     @Value("${jwt.expiration.access}")
-    private static long accessTokenExpiration;
+    private long accessTokenExpiration;
 
     @Value("${jwt.expiration.refresh}")
-    private static long refreshTokenExpiration;
-
-
+    private long refreshTokenExpiration;
 
     // Generate access token
-    public static String generateAccessToken(User user) {
-        // Collect the role and privileges
-        String role = user.getRole().getName();  // Role (e.g., "ADMIN")
+    public String generateAccessToken(User user) {
+        if (secretKey == null || secretKey.trim().isEmpty()) {
+            throw new IllegalStateException("JWT secret key is not configured");
+        }
+        String role = user.getRole().getName().name();
         List<String> privileges = user.getRole().getPrivileges().stream()
-                .map(privilege -> privilege.getName().toString()) // Privileges (e.g., "READ_PRIVILEGE")
+                .map(privilege -> privilege.getName().toString())
                 .collect(Collectors.toList());
 
         return Jwts.builder()
-                .setSubject(user.getUserName())
+                .setSubject(user.getEmail())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiration)) // Access token valid for 1 hour
-                .claim("role", role) // Store role name in the "role" claim
-                .claim("privileges", privileges) // Store privileges list in the "privileges" claim
+                .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiration))
+                .claim("role", role)
+                .claim("privileges", privileges)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
-
     // Generate refresh token
-
-    // Helper method to generate JWT token including subject (user) and authorities (roles)
-    public static String generateRefreshToken(User user) {
-        // Collect the role and privileges
-        String role = user.getRole().getName();  // Role (e.g., "ADMIN")
+    public String generateRefreshToken(User user) {
+        if (secretKey == null || secretKey.trim().isEmpty()) {
+            throw new IllegalStateException("JWT secret key is not configured");
+        }
+        String role = user.getRole().getName().name();
         List<String> privileges = user.getRole().getPrivileges().stream()
-                .map(privilege -> privilege.getName().toString()) // Privileges (e.g., "READ_PRIVILEGE")
+                .map(privilege -> privilege.getName().toString())
                 .collect(Collectors.toList());
 
         return Jwts.builder()
-                .setSubject(user.getUserName())
+                .setSubject(user.getEmail())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpiration)) // Refresh token valid for 15 days
-                .claim("role", role) // Store role name in the "role" claim
-                .claim("privileges", privileges) // Store privileges list in the "privileges" claim
+                .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpiration))
+                .claim("role", role)
+                .claim("privileges", privileges)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
     // Validate token
-    public static boolean validateToken(String token) {
+    public boolean validateToken(String token) {
         try {
-            // Parsing the token and validating signature, expiration, etc.
             Jwts.parser().setSigningKey(secretKey).build().parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
@@ -74,7 +71,7 @@ public class JwtUtils {
     }
 
     // Extract claims from the token
-    public static Claims extractClaims(String token) {
+    public Claims extractClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey)
                 .build()
@@ -83,23 +80,24 @@ public class JwtUtils {
     }
 
     // Extract username from token
-    public static String extractUsername(String token) {
+    public String extractUsername(String token) {
         return extractClaims(token).getSubject();
     }
 
     // Extract authorities (roles) from token
-    public static String extractAuthorities(String token) {
+    public String extractAuthorities(String token) {
         return extractClaims(token).get("role", String.class);
     }
 
     // Get expiration date
-    public static Date extractExpiration(String token) {
+    public Date extractExpiration(String token) {
         return extractClaims(token).getExpiration();
     }
 
-    public static boolean isTokenExpired(String token) {
+    // Check if token is expired
+    public boolean isTokenExpired(String token) {
         Date expiration = extractClaims(token).getExpiration();
-        return expiration.before(new Date()); // Return true if the token has expired
+        return expiration.before(new Date());
     }
 }
 

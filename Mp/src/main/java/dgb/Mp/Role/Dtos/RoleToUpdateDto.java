@@ -1,5 +1,6 @@
 package dgb.Mp.Role.Dtos;
 
+import dgb.Mp.Role.enums.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ public class RoleToUpdateDto {
 
     private Long Id;
 
-    private String Name;
+    private RoleName Name;
 
     private Set<String> privilegesIdsList;
 

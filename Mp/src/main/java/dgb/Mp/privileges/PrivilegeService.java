@@ -1,5 +1,7 @@
 package dgb.Mp.privileges;
 
+import dgb.Mp.privileges.Dtos.PrivilegeDtoToAdd;
+
 import java.util.Set;
 
 public interface PrivilegeService {
@@ -9,4 +11,6 @@ public interface PrivilegeService {
     Set<Privilege> getAllPrivileges();
 
     Privilege getPrivilegeByName(String privilegeName);
+
+    Privilege addPrivilege(PrivilegeDtoToAdd privilegeDtoToAdd);
 }
